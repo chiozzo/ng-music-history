@@ -5,48 +5,81 @@
 	<title>Music History</title>
 	<link type="text/css" rel="stylesheet" href="main.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<link rel="stylesheet" href="lib/bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css">
 </head>
 <body>
 	<div class="container-fluid" ng-app="musicHistory">
-			<div class="row">
-			  <div class="col-md-12">
-					<nav class="navbar navbar-inverse">
-					  <div class="container-fluid">
-					    <!-- Brand and toggle get grouped for better mobile display -->
-					    <div class="navbar-header">
-					      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					        <span class="sr-only">Toggle navigation</span>
-					        <span class="icon-bar"></span>
-					        <span class="icon-bar"></span>
-					        <span class="icon-bar"></span>
-					      </button>
-					      <a class="navbar-brand"><img id="brandIcon" src="http://www.clker.com/cliparts/G/A/g/P/G/p/orange-music-note-hi.png" alt="music note"></a>
-					    </div>
+		<!--
 
-					    <!-- Collect the nav links, forms, and other content for toggling -->
-					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					      <ul class="nav navbar-nav">
-					        <li>
-					        	<!-- <select id="" ng-model="" ng-options=""></select> -->
-					        </li>
-					      </ul>
-					    </div><!-- /.navbar-collapse -->
-					  </div><!-- /.container-fluid -->
-					</nav>
+		Navigation Area
 
+		-->
+		<div class="row">
+		  <div class="col-md-12">
+				<nav class="navbar navbar-material-grey-900 shadow-z-5">
+				  <div class="container-fluid">
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				      <a class="navbar-brand"><img id="brandIcon" src="http://www.clker.com/cliparts/G/A/g/P/G/p/orange-music-note-hi.png" alt="music note"></a>
+				    </div>
 
-			  </div>
-			</div>
-			<div class="row">
-			  <div class="col-md-offset-2 col-md-8" ng-controller="songsCtrl">
-			  <ul ng-repeat="song in songs">
-			  	<li>{{song.title}}</li>
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<!--
+		<div class="row">
+		  <div class="col-md-offset-2 col-md-8" ng-controller="songsCtrl">
+			  <ul ng-repeat="i in songs" class="song-entry list-unstyled">
+			  	<li class="well row">
+				  	<div class="song-info col-md-9">
+							<h1>{{i.title}}</h1>
+							<h4>by <b>{{i.artist}}</b></h4>
+							<h4>on the album <b>{{i.album}}</b></h4>
+				  	</div>
+						<a class="song-buttons col-md-3">
+							<button class="delete-song btn btn-large btn-material-orange btn-raised" ng-click="deleteSong(i)">Delete Song</button>
+						</a>
+			  	</li>
 			  </ul>
-			  </div>
-			</div>
+		  </div>
+		</div>
+ -->
+				      <ul class="nav navbar-nav">
+				        <li ng-controller="songsCtrl">
+				        	<a><select id="filterArtist" ng-model="filterArtist" ng-options="i.album group by i.artist for i in songs"></select></a>
+				        	<a><select id="filterAlbum" ng-model="filterAlbum" ng-options="i.album for i in songs"></select></a>
+				        </li>
+				      </ul>
+				    </div><!-- /.navbar-collapse -->
+				  </div><!-- /.container-fluid -->
+				</nav>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-md-offset-2 col-md-8" ng-controller="songsCtrl">
+			  <ul ng-repeat="i in songs" class="song-entry list-unstyled">
+			  	<li class="well row">
+				  	<div class="song-info col-md-9">
+							<h1>{{i.title}}</h1>
+							<h4>by <b>{{i.artist}}</b></h4>
+							<h4>on the album <b>{{i.album}}</b></h4>
+				  	</div>
+						<a class="song-buttons col-md-3">
+							<button class="delete-song btn btn-large btn-material-orange btn-raised" ng-click="deleteSong(i)">Delete Song</button>
+						</a>
+			  	</li>
+			  </ul>
+		  </div>
+		</div>
 	</div>
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	<script src="lib/bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
 	<script type="text/javascript" src="lib/bower_components/angular/angular.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 </body>
