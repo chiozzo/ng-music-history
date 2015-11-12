@@ -1,35 +1,42 @@
 [
 	{
+		"id": 1,
 		"album": "These Are The Good Times People",
 		"artist": "The Presidents of the United States of America",
 		"title": "Truckstop Butterfly"
 	},
 	{
+		"id": 2,
 		"album": "Supermercado",
 		"artist": "2 Skinnee J's",
 		"title": "Pluto"
 	},
 	{
+		"id": 3,
 		"album": "Discovery",
 		"artist": "Daft Punk",
 		"title": "Something About Us"
 	},
 	{
+		"id": 4,
 		"album": "Don't Tread On Me",
 		"artist": "311",
 		"title": "Speak Easy"
 	},
 	{
+		"id": 5,
 		"album": "Flood",
 		"artist": "They Might Be Giants",
 		"title": "Your Racist Friend"
 	},
 	{
+		"id": 6,
 		"album": "Love Everybody",
 		"artist": "The Presidents of the United States of America",
 		"title": "Poke & Destroy"
 	},
 	{
+		"id": 7,
 		"album": "A Funk Odyssey",
 		"artist": "Jamiroquai",
 		"title": "You Give Me Something"

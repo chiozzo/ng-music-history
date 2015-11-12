@@ -27,7 +27,7 @@
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <ul class="nav navbar-nav">
 				        <li ng-controller="songsCtrl">
-				        	<a><select id="filterArtist" class="makeBlack" ng-model="filterArtist" ng-options="i.album group by i.artist for i in songs"></select></a>
+				        	<a><select id="filterArtist" ng-model="filterArtist" ng-options="i.album group by i.artist for i in songs"></select></a>
 				        </li>
 				        <li>
 				        	<a ng-view></a>

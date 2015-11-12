@@ -1,35 +1,42 @@
 [
 	{
+		"id": 8,
 		"album": "Blazing Arrow",
 		"artist": "Blackalicious",
 		"title": "First in Flight"
 	},
 	{
+		"id": 9,
 		"album": "These Are The Good Times People",
 		"artist": "The Presidents of the United States of America",
 		"title": "Warhead"
 	},
 	{
+		"id": 10,
 		"album": "Discovery",
 		"artist": "Daft Punk",
 		"title": "Harder, Better, Faster, Stronger"
 	},
 	{
+		"id": 11,
 		"album": "Sigh No More",
 		"artist": "Mumford & Sons",
 		"title": "The Cave"
 	},
 	{
+		"id": 12,
 		"album": "Babel",
 		"artist": "Mumford & Sons",
 		"title": "Hopeless Wanderer"
 	},
 	{
+		"id": 13,
 		"album": "Blazing Arrow",
 		"artist": "Blackalicious",
 		"title": "Chemical Calisthenics"
 	},
 	{
+		"id": 14,
 		"album": "Kudos To You!",
 		"artist": "The Presidents of the United States of America",
 		"title": "Poor Little Me"
