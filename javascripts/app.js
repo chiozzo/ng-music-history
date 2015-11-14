@@ -1,48 +1,22 @@
-var app = angular.module('musicHistory', ['ngRoute']);
+var app = angular.module('musicHistory', ['firebase','ngRoute']);
 
-app.config(['$routeProvider', function($routeProvider){
-  $routeProvider
-  .when('/songs/list', {
-    templateUrl: 'partials/song-list.html',
-    controller: 'songsCtrl'
-  })
-  .when('/songs/new', {
-    templateUrl: 'partials/song-form.html',
-    controller: 'addSongsCtrl'
-  });
-}]);
+// app.config(['$routeProvider', function($routeProvider){
+//   $routeProvider
+//   .when('/songs/list', {
+//     templateUrl: 'partials/song-list.html',
+//     controller: 'songsCtrl'
+//   })
+//   .when('/songs/new', {
+//     templateUrl: 'partials/song-form.html',
+//     controller: 'addSongsCtrl'
+//   });
+// }]);
 
-app.factory('songFactory', function($http, $q){
+app.controller('addSongsCtrl', ['$scope', '$firebaseArray', function($scope, $firebaseArray){
 
-  var localSongs = null;
+  var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/6c7cc7e9-b5d8-42f1-acf8-b0a98a1e185f/songs');
 
-return {
-  getSongfromJSON: function(){
-    return $q(function(resolve, reject){
-      $http.get('songs.json')
-      .success(function(objectFromJSONFile){
-        localSongs = objectFromJSONFile;
-        resolve(objectFromJSONFile);
-      }, function(error){
-        reject(error);
-      });
-    });
-  },
-
-  getLocalSongs: function(){
-    return localSongs;
-  },
-
-  addSongToJSON: function(newSong){
-    console.log("newSong", newSong);
-    localSongs.push(newSong);
-  }
-};
-});
-
-app.controller('addSongsCtrl', ['$scope', 'songFactory', function($scope, songFactory){
-
-
+  $scope.songList = $firebaseArray(firebaseRef);
 
   $scope.newSong = {
     title: null,
@@ -51,7 +25,7 @@ app.controller('addSongsCtrl', ['$scope', 'songFactory', function($scope, songFa
   };
 
   $scope.addSong = function(){
-    songFactory.addSongToJSON({
+    $scope.songList.$add({
       title: $scope.newSong.title,
       artist: $scope.newSong.artist,
       album: $scope.newSong.album
@@ -65,26 +39,16 @@ app.controller('addSongsCtrl', ['$scope', 'songFactory', function($scope, songFa
 
 }]);
 
-app.controller("songsCtrl", ['$scope', 'songFactory', function($scope, songFactory) {
+app.controller("songsCtrl", ['$scope', '$firebaseArray', function($scope, $firebaseArray) {
 
-  if(songFactory.getLocalSongs() === null){
-    songFactory.getSongfromJSON()
-    .then(function(JSONarray){
-      $scope.songList = JSONarray;
-    });
-  } else {
-    $scope.songList = songFactory.getLocalSongs;
-  }
+  var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/6c7cc7e9-b5d8-42f1-acf8-b0a98a1e185f/songs');
 
-  $scope.oneSong = function(song){
-    console.log("song", song);
-    $.ajax('songs.json')
-    .done(function(ajaxSongs1){
-      $scope.singleSong = ajaxSongs1;
-    }).fail(function(error){
-      console.log("error", error);
-    });
-  };
+  $scope.songList = $firebaseArray(firebaseRef.orderByChild('artist'));
+
+  $scope.songList.$loaded()
+  .then(function(){
+    console.log("$scope.songList", $scope.songList);
+  });
 
 /**************************************************
 deleteSong seems to not be recognizing $(this) without it's own click event. Redundant, I know.
@@ -92,7 +56,7 @@ deleteSong seems to not be recognizing $(this) without it's own click event. Red
   $scope.deleteSong = function(i){
     console.log("i", i);
     $(document).on('click', '.song-entry', function(){
-      var thisSong = $(this).closest(".song-entry");
+      var thisSong = angular.element(this).closest(".song-entry");
       console.log("thisSong", thisSong);
       thisSong.hide(function() {
         $(this).remove();
@@ -105,4 +69,5 @@ deleteSong seems to not be recognizing $(this) without it's own click event. Red
 // I'm supposed to wrap all my code in a closure?
 (function() { })();
 
-// $.material.init();
+// Initialize material design
+$.material.init();
