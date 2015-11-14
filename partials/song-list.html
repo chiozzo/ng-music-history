@@ -1,5 +1,5 @@
 <div><input class="makeBlack" type="text" ng-model="query"></div>
 
-<div ng-repeat="song in songs | filter: query">
+<div ng-repeat="song in songList | filter: query">
   <a href="#/songs/{{ song.id }}" ng-click="oneSong(song.id)">{{ song.title }}</a>
 </div>
