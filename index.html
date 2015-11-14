@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="container-fluid" ng-app="musicHistory">
-
+	<div ng-controller="songsCtrl">
 		<div class="row">
 		  <div class="col-md-12">
 				<nav class="navbar navbar-material-grey-900 shadow-z-5">
@@ -26,12 +26,15 @@
 
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <ul class="nav navbar-nav">
-				        <li ng-controller="songsCtrl">
-				        	<a><select id="filterArtist" class="makeBlack" ng-model="filterArtist" ng-options="i.album group by i.artist for i in songs"></select></a>
+				        <li>
+				        	<a><select id="filterAlbum" class="makeBlack" ng-model="filterAlbum" ng-options="i.album group by i.artist for i in songList"></select></a>
 				        </li>
 				        <li>
-				        	<a ng-view></a>
+				        	<a><input class="makeBlack" type="text" placeholder="Search Song/Artist/Album" ng-model="filterString"></a>
 				        </li>
+				        <!-- <li>
+				        	<a ng-view></a>
+				        </li> -->
 				      </ul>
 				    </div>
 				  </div>
@@ -41,8 +44,9 @@
 
 
 		<div class="row">
-		  <div class="col-md-offset-2 col-md-8" ng-controller="songsCtrl">
-			  <ul ng-repeat="i in songs" class="list-unstyled">
+			<div class="col-md-2" ng-view></div>
+		  <div class="col-md-8">
+			  <ul ng-repeat="i in songList | filter: filterAlbum | filter: filterString" class="list-unstyled">
 			  	<li class="well row song-entry">
 				  	<div class="song-info col-md-9">
 							<h1>{{i.title}}</h1>
@@ -57,8 +61,9 @@
 		  </div>
 		</div>
 	</div>
+	</div>
 
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="/lib/bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="/lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="/lib/bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
 	<script src="/lib/bower_components/angular/angular.min.js"></script>
