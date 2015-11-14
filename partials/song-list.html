@@ -33,14 +33,14 @@
 		<div class="col-md-2" ng-include src="'partials/song-form.html'" ng-controller='addSongsCtrl'></div>
 	  <div class="col-md-8">
 		  <ul ng-repeat="i in songList | filter: filterAlbum | filter: filterString" class="list-unstyled">
-		  	<li class="well row song-entry">
+		  	<li class="well row song-entry" id={{song.$id}}>
 			  	<div class="song-info col-md-9">
 						<h1>{{i.title}}</h1>
 						<h4>by <b>{{i.artist}}</b></h4>
 						<h4>on the album <b>{{i.album}}</b></h4>
 			  	</div>
 					<a class="song-buttons col-md-3">
-						<button class="delete-song btn btn-large btn-material-orange btn-raised" ng-click="deleteSong(i)">Delete Song</button>
+						<button class="delete-song btn btn-large btn-material-orange btn-raised" ng-click="deleteSong(i, $event)">Delete Song</button>
 					</a>
 		  	</li>
 		  </ul>

@@ -53,15 +53,17 @@ app.controller("songsCtrl", ['$scope', '$firebaseArray', function($scope, $fireb
 /**************************************************
 deleteSong seems to not be recognizing $(this) without it's own click event. Redundant, I know.
 **************************************************/
-  $scope.deleteSong = function(i){
-    console.log("i", i);
-    $(document).on('click', '.song-entry', function(){
-      var thisSong = angular.element(this).closest(".song-entry");
+  $scope.deleteSong = function(song, event){
+    console.log("song", song);
+    console.log("event", event);
+    // $(document).on('click', '.song-entry', function(){
+      var thisSong = angular.element(song.$id);
+      console.log("angular.element(this)", angular.element(this));
       console.log("thisSong", thisSong);
       thisSong.hide(function() {
-        $(this).remove();
+        angular.element(this).remove();
       });
-    });
+    // });
   };
 }]);
 
