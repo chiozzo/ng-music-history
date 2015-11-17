@@ -1,0 +1,21 @@
+<div>
+  <nav class="row">
+    <div class="nav-wrapper col s12">
+      <!-- <a class="brand-logo" class="col s3"><img id="brandIcon" src="http://www.clker.com/cliparts/G/A/g/P/G/p/orange-music-note-hi.png" alt="music note"></a> -->
+      <ul class="right col s9">
+        <li>
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" placeholder="Search Song/Artist/Album" ng-model="AllCtrl.filterString" required>
+              <label for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </li>
+        <li class="input-field">
+          <select id="filterAlbum" ng-model="AllCtrl.filterAlbum" ng-options="i.album group by i.artist for i in SongsCtrl.songList"></select>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

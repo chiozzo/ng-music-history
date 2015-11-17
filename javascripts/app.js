@@ -1,36 +1,42 @@
 var app = angular.module('musicHistory', ['firebase','ngRoute']);
 
-// app.config(['$routeProvider', function($routeProvider){
-//   $routeProvider
-//   .when('/songs/list', {
-//     templateUrl: 'partials/song-list.html',
-//     controller: 'songsCtrl'
-//   })
-//   .when('/songs/new', {
-//     templateUrl: 'partials/song-form.html',
-//     controller: 'addSongsCtrl'
-//   });
-// }]);
+app.config(['$routeProvider', function($routeProvider){
+  $routeProvider
+  .when('/songs/list', {
+    templateUrl: 'partials/song-list.html',
+    controller: 'songsCtrl as SongsCtrl'
+  })
+  .when('/songs/new', {
+    templateUrl: 'partials/song-form.html',
+    controller: 'addSongsCtrl as AddSongsCtrl'
+  });
+}]);
 
-app.controller('addSongsCtrl', ['$scope', '$firebaseArray', function($scope, $firebaseArray){
+app.controller('allCtrl', [function(){
+
+  this.filterString;
+
+}]);
+
+app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
 
   var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/6c7cc7e9-b5d8-42f1-acf8-b0a98a1e185f/songs');
 
-  $scope.songList = $firebaseArray(firebaseRef);
+  this.songList = $firebaseArray(firebaseRef);
 
-  $scope.newSong = {
+  this.newSong = {
     title: null,
     artist: null,
     album: null
   };
 
-  $scope.addSong = function(){
-    $scope.songList.$add({
-      title: $scope.newSong.title,
-      artist: $scope.newSong.artist,
-      album: $scope.newSong.album
-    });
-    $scope.newSong = {
+  this.addSong = function(){
+    this.songList.$add({
+      title: this.newSong.title,
+      artist: this.newSong.artist,
+      album: this.newSong.album
+    }.bind(this));
+    this.newSong = {
       title: null,
       artist: null,
       album: null
@@ -39,21 +45,21 @@ app.controller('addSongsCtrl', ['$scope', '$firebaseArray', function($scope, $fi
 
 }]);
 
-app.controller("songsCtrl", ['$scope', '$firebaseArray', function($scope, $firebaseArray) {
+app.controller("songsCtrl", ['$firebaseArray', function($firebaseArray) {
 
   var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/6c7cc7e9-b5d8-42f1-acf8-b0a98a1e185f/songs');
 
-  $scope.songList = $firebaseArray(firebaseRef.orderByChild('artist'));
+  this.songList = $firebaseArray(firebaseRef.orderByChild('artist'));
 
-  $scope.songList.$loaded()
+  this.songList.$loaded()
   .then(function(){
-    console.log("$scope.songList", $scope.songList);
-  });
+    console.log("this.songList", this.songList);
+  }.bind(this));
 
 /**************************************************
 deleteSong seems to not be recognizing $(this) without it's own click event. Redundant, I know.
 **************************************************/
-  $scope.deleteSong = function(i){
+  this.deleteSong = function(i){
     console.log("i", i);
     $(document).on('click', '.song-entry', function(){
       var thisSong = angular.element(this).closest(".song-entry");
@@ -70,4 +76,4 @@ deleteSong seems to not be recognizing $(this) without it's own click event. Red
 (function() { })();
 
 // Initialize material design
-$.material.init();
+// $.material.init();
