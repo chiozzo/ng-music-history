@@ -35,7 +35,7 @@ app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
       title: this.newSong.title,
       artist: this.newSong.artist,
       album: this.newSong.album
-    }.bind(this));
+    });
     this.newSong = {
       title: null,
       artist: null,
