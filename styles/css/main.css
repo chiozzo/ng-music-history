@@ -8,7 +8,11 @@
 body {
   background-color: #ffba54; }
 
-.makeBlack {
+nav {
+  background-color: black; }
+
+.input-field > select {
+  display: inline;
   color: black; }
 
 /*# sourceMappingURL=main.css.map */
