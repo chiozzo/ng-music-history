@@ -2,6 +2,10 @@ var app = angular.module('musicHistory', ['firebase','ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider){
   $routeProvider
+  .when('/', {
+    templateUrl: 'partials/login.html',
+    controller: 'loginCtrl as LoginCtrl'
+  })
   .when('/songs/list', {
     templateUrl: 'partials/song-list.html',
     controller: 'songsCtrl as SongsCtrl'
@@ -12,11 +16,11 @@ app.config(['$routeProvider', function($routeProvider){
   });
 }]);
 
-app.controller('allCtrl', [function(){
+app.controller('allCtrl', function(){
 
   this.filterString = "";
 
-}]);
+});
 
 app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
 
@@ -49,7 +53,7 @@ app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
 }]);
 
 app.controller('loginCtrl', function(){
-  var loginGitHub = function(){
+  this.loginGitHub = function(){
     var ref = new Firebase("https://blinding-heat-7542.firebaseio.com");
     ref.authWithOAuthPopup("github", function(error, authData) {
       if (error) {
