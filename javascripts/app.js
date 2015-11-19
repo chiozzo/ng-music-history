@@ -3,14 +3,10 @@ var app = angular.module('musicHistory', ['firebase','ngRoute']);
 app.config(['$routeProvider', function($routeProvider){
   $routeProvider
   .when('/', {
-    templateUrl: 'partials/login.html',
-    controller: 'loginCtrl as LoginCtrl'
-  })
-  .when('/songs/list', {
     templateUrl: 'partials/song-list.html',
     controller: 'songsCtrl as SongsCtrl'
   })
-  .when('/songs/new', {
+  .when('/new', {
     templateUrl: 'partials/song-form.html',
     controller: 'addSongsCtrl as AddSongsCtrl'
   });
@@ -22,6 +18,31 @@ app.controller('allCtrl', function(){
 
 });
 
+/**
+ * $firebaseAuth stuff should be in a factory
+ */
+app.controller("loginCtrl", ["$firebaseAuth", function($firebaseAuth) {
+  var ref = new Firebase("https://blinding-heat-7542.firebaseio.com");
+
+  this.auth = $firebaseAuth(ref);
+
+  this.auth.$onAuth(function(authData) {
+    this.authData = authData;
+  }.bind(this));
+
+  this.loginGitHub = function(){
+    this.auth.$authWithOAuthPopup("github")
+    .then(function(authData) {
+      console.log("Authenticated successfully with payload:", authData);
+    }).catch(function(error){
+      console.log("Login Failed!", error);
+    });
+  }.bind(this);
+}]);
+
+/**
+ * firebaseRef should point to specific user's /songs. Perhaps return from the factory
+ */
 app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
 
   var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/6c7cc7e9-b5d8-42f1-acf8-b0a98a1e185f/songs');
@@ -52,19 +73,9 @@ app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
 
 }]);
 
-app.controller('loginCtrl', function(){
-  this.loginGitHub = function(){
-    var ref = new Firebase("https://blinding-heat-7542.firebaseio.com");
-    ref.authWithOAuthPopup("github", function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        console.log("Authenticated successfully with payload:", authData);
-      }
-    });
-  };
-});
-
+/**
+ * firebaseRef should point to specific user's /songs. Perhaps return from the factory
+ */
 app.controller("songsCtrl", ['$firebaseArray', function($firebaseArray) {
 
   var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/6c7cc7e9-b5d8-42f1-acf8-b0a98a1e185f/songs');
@@ -91,6 +102,10 @@ deleteSong seems to not be recognizing $(this) without it's own click event. Red
   };
 }]);
 
+
+/**
+ * ANALYZE
+ */
 app.directive('songBrief', function(){
   return {
     restrict: 'E',

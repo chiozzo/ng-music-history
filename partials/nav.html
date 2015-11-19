@@ -1,20 +1,22 @@
 <nav>
     <div class="nav-wrapper row">
-      <form class="col s6">
+      <form class="col s4">
         <div class="input-field">
-          <input id="search" type="search" placeholder="Search Song/Artist/Album" ng-model="AllCtrl.filterString" required>
+          <input id="search" type="search" placeholder="Hi, {{ LoginCtrl.authData.github.displayName }}! Search Here!" ng-model="AllCtrl.filterString" required>
           <label for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
         </div>
       </form>
       <ul class="col s4">
-        <!-- <a class="brand-logo" class="col s3"><img id="brandIcon" src="http://www.clker.com/cliparts/G/A/g/P/G/p/orange-music-note-hi.png" alt="music note"></a> -->
         <li class="input-field">
           <select id="filterAlbum" ng-model="AllCtrl.filterAlbum" ng-options="i.album group by i.artist for i in SongsCtrl.songList"></select>
         </li>
       </ul>
       <div class="col s2">
         <a href="/#/songs/new" class="btn-floating btn-large waves-effect waves-light orange"><i class="material-icons">add</i></a>
+      </div>
+      <div class="col s2">
+        <button class="btn" ng-click="LoginCtrl.auth.$unauth()">Logout</button>
       </div>
     </div>
   </nav>
