@@ -15,4 +15,14 @@ nav {
   display: inline;
   color: black; }
 
+.star--empty {
+  color: black; }
+
+.star--filled {
+  color: yellow; }
+
+.rating > li {
+  display: inline;
+  font-size: 3em; }
+
 /*# sourceMappingURL=main.css.map */

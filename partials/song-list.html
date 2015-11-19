@@ -4,12 +4,11 @@
 	  <ul ng-repeat="i in SongsCtrl.songList | filter: AllCtrl.filterString" class="list-unstyled">
 	  	<li class="section card-panel hoverable row song-entry">
 		  	<div class="song-info col s10">
-					<h1>{{i.title}}</h1>
-					<h4>by <b>{{i.artist}}</b></h4>
-					<h4>on the album <b>{{i.album}}</b></h4>
+					<h3>{{i.title}}</h3>
+					<x-song-brief song="i" max-rating=5></x-song-brief>
 		  	</div>
 				<a class="song-buttons col s2">
-					<button class="delete-song btn-floating btn-large waves-effect waves-light" ng-click="SongsCtrl.deleteSong(i)"><i class="material-icons">delete</i></button>
+					<button class="delete-song btn-floating btn-large waves-effect waves-light orange" ng-click="SongsCtrl.deleteSong(i)"><i class="material-icons">delete</i></button>
 				</a>
 	  	</li>
 	  </ul>

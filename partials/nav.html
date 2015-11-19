@@ -1,21 +1,3 @@
-<!-- <div>
-  <nav class="row">
-    <div class="nav-wrapper col s12">
-      <a class="brand-logo" class="col s3"><img id="brandIcon" src="http://www.clker.com/cliparts/G/A/g/P/G/p/orange-music-note-hi.png" alt="music note"></a>
-      <ul class="right col s9">
-        <li>
-          <form>
-            <div class="input-field">
-              <label for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div> -->
-
 <nav>
     <div class="nav-wrapper row">
       <form class="col s6">
@@ -25,10 +7,14 @@
           <i class="material-icons">close</i>
         </div>
       </form>
-      <ul class="col s6">
+      <ul class="col s4">
+        <!-- <a class="brand-logo" class="col s3"><img id="brandIcon" src="http://www.clker.com/cliparts/G/A/g/P/G/p/orange-music-note-hi.png" alt="music note"></a> -->
         <li class="input-field">
           <select id="filterAlbum" ng-model="AllCtrl.filterAlbum" ng-options="i.album group by i.artist for i in SongsCtrl.songList"></select>
         </li>
       </ul>
+      <div class="col s2">
+        <a href="/#/songs/new" class="btn-floating btn-large waves-effect waves-light orange"><i class="material-icons">add</i></a>
+      </div>
     </div>
   </nav>

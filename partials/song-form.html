@@ -11,5 +11,9 @@
     <label>Artist</label>
     <input type="text" ng-model="AddSongsCtrl.newSong.artist">
   </div>
-  <button class="waves-effect waves-light btn" ng-click="AddSongsCtrl.addSong()">Add Song</button>
+  <div class="row input-field">
+    <label>Rating</label>
+    <input type="number" ng-model="AddSongsCtrl.newSong.rating">
+  </div>
+  <a href="/#/songs/list" class="waves-effect waves-light btn" ng-click="AddSongsCtrl.addSong()">Add Song</a>
 </section>

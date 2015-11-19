@@ -27,19 +27,22 @@ app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
   this.newSong = {
     title: null,
     artist: null,
-    album: null
+    album: null,
+    rating: null
   };
 
   this.addSong = function(){
     this.songList.$add({
       title: this.newSong.title,
       artist: this.newSong.artist,
-      album: this.newSong.album
+      album: this.newSong.album,
+      rating: this.newSong.rating
     });
     this.newSong = {
       title: null,
       artist: null,
-      album: null
+      album: null,
+      rating: null
     };
   };
 
@@ -70,6 +73,32 @@ deleteSong seems to not be recognizing $(this) without it's own click event. Red
     });
   };
 }]);
+
+app.directive('songBrief', function(){
+  return {
+    restrict: 'E',
+    templateUrl: 'partials/song-brief.html',
+    scope:{
+      selectedSong: "=song",
+      maxRating: "="
+    },
+    link: function(scope, element, attributes){
+      var setStars = function(){
+        scope.stars = [];
+        var rating = parseInt(scope.selectedSong.rating);
+        for (var i = 0; i < scope.maxRating; i++) {
+          var clazz = (rating <= i) ? "star--empty" : "star--filled";
+          scope.stars.push({class: clazz});
+        }
+      };
+      scope.$watch('selectedSong', function(value){
+        scope.selectedSong = value;
+        setStars();
+      });
+      setStars();
+    }
+  };
+});
 
 
 // I'm supposed to wrap all my code in a closure?
