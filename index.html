@@ -10,7 +10,16 @@
 <body>
 
 	<div ng-controller="allCtrl as AllCtrl">
-		<div ng-view></div>
+		<div ng-controller="loginCtrl as LoginCtrl">
+		  <div ng-hide="LoginCtrl.authData" class="row">
+				<img class="col offset-s5 s2" src="http://cdn.flaticon.com/png/256/25231.png" alt="GitHub icon">
+		    <button class="btn col offset-s5 s2" ng-click="LoginCtrl.loginGitHub()">Login With GitHub</button>
+		  </div>
+		  <div ng-show="LoginCtrl.authData">
+				<div ng-include="'partials/nav.html'"></div>
+				<div ng-view></div>
+		  </div>
+		</div>
 	</div>
 
 	<script src="/lib/bower_components/jquery/dist/jquery.min.js"></script>
