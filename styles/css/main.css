@@ -11,8 +11,11 @@ body {
 nav {
   background-color: black; }
 
-.input-field > select {
+.input-field select {
   display: inline;
+  color: black; }
+
+.input-field label, .input-field input {
   color: black; }
 
 .star--empty {
@@ -21,7 +24,7 @@ nav {
 .star--filled {
   color: yellow; }
 
-.rating > li {
+.rating li {
   display: inline;
   font-size: 3em; }
 
