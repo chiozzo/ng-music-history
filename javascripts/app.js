@@ -45,7 +45,9 @@ app.controller("loginCtrl", ["$firebaseAuth", function($firebaseAuth) {
  */
 app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
 
-  var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/6c7cc7e9-b5d8-42f1-acf8-b0a98a1e185f/songs');
+  var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com');
+  var currentUser = firebaseRef.getAuth().uid;
+  firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/' + currentUser + "/songs");
 
   this.songList = $firebaseArray(firebaseRef);
 
@@ -78,7 +80,9 @@ app.controller('addSongsCtrl', ['$firebaseArray', function($firebaseArray){
  */
 app.controller("songsCtrl", ['$firebaseArray', function($firebaseArray) {
 
-  var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/6c7cc7e9-b5d8-42f1-acf8-b0a98a1e185f/songs');
+  var firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com');
+  var currentUser = firebaseRef.getAuth().uid;
+  firebaseRef = new Firebase('https://blinding-heat-7542.firebaseio.com/users/' + currentUser + "/songs");
 
   this.songList = $firebaseArray(firebaseRef.orderByChild('artist'));
 
